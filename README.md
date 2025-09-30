@@ -5,7 +5,7 @@ An intelligent recipe recommendation system built using Retrieval-Augmented Gene
 ## 🌟 Features
 
 - **Intelligent Ingredient Matching**: Uses semantic embeddings to find recipes that match your available ingredients
-- **Conversational AI**: Powered by Claude Sonnet 4 for natural, helpful cooking advice
+- **Conversational AI**: Powered by Claude Sonnet 3.5 Haiku for natural, helpful cooking advice
 - **Smart Filtering**: Filter recipes by type (starters, mains, desserts, etc.)
 - **Missing Ingredient Detection**: Identifies what you're missing and suggests substitutions
 - **Interactive CLI**: Easy-to-use command-line interface for quick recipe searches
