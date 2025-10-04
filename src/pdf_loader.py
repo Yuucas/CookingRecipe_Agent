@@ -26,7 +26,6 @@ def split_into_chunks(documents):
     recipe_chunks = []
     
     for i, doc in enumerate(documents):
-        # IMPORTANT: Reset variables for EACH recipe
         recipe_header = ""
         serving_suggestion = ""
         ingredients = ""
@@ -36,7 +35,7 @@ def split_into_chunks(documents):
         text = doc.page_content
         
         # Skip pages with too little content
-        if len(text) < 100:
+        if len(text) < 50:
             continue
             
         # Check if page contains both INGREDIENTS and METHOD sections
