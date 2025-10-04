@@ -1,6 +1,5 @@
 """
 Upload recipes to Pinecone vector database
-This script loads recipes from PDF and uploads them to Pinecone
 """
 
 import os
@@ -16,16 +15,16 @@ DATASET_PATH = os.getenv('DATASET_PATH')
 def main():
     """Main pipeline: Load PDF -> Extract recipes -> Upload to Pinecone"""
     
-    print("=" * 60)
+    print("=" * 50)
     print("RECIPE RAG SYSTEM - UPLOAD PIPELINE")
-    print("=" * 60)
+    print("=" * 50)
     
-    # Step 1: Load PDF documents
+    # Load PDF documents
     print("\n[1/4] Loading PDF documents...")
     documents = load_pdf_documents(DATASET_PATH)
     print(f"✅ Loaded {len(documents)} pages from {DATASET_PATH}")
     
-    # Step 2: Extract recipe chunks
+    # Extract recipe chunks
     print("\n[2/4] Extracting recipe chunks...")
     recipe_chunks = split_into_chunks(documents)
     print(f"✅ Extracted {len(recipe_chunks)} recipe chunks")
@@ -39,7 +38,7 @@ def main():
         print(f"  Serving: {sample['serving_suggestion']}")
         print(f"  Ingredients (first 100 chars): {sample['ingredients'][:100]}...")
     
-    # Step 3: Initialize vector store
+    # Initialize vector store
     print("\n[3/4] Initializing Pinecone vector store...")
     try:
         vector_store = initialize_vector_store()
@@ -56,7 +55,7 @@ def main():
     current_count = stats['total_vector_count']
     print(f"Current vectors in database: {current_count}")
     
-    # Step 4: Upload recipes
+    # Upload recipes
     print("\n[4/4] Uploading recipes to Pinecone...")
     
     # Ask for confirmation if database already has vectors
