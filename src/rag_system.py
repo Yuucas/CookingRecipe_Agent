@@ -79,17 +79,17 @@ class RecipeRAG:
             score = match['score']
             
             recipe_text = f"""
-Recipe {i}: {metadata['recipe_name']}
-Type: {metadata['recipe_type']}
-Serving: {metadata['serving_suggestion']}
-Relevance Score: {score:.2f}
-
-INGREDIENTS:
-{metadata['ingredients']}
-
-METHOD:
-{metadata['method'][:500]}{'...' if len(metadata['method']) > 500 else ''}
-"""
+            Recipe {i}: {metadata['recipe_name']}
+            Type: {metadata['recipe_type']}
+            Serving: {metadata['serving_suggestion']}
+            Relevance Score: {score:.2f}
+            
+            INGREDIENTS:
+            {metadata['ingredients']}
+            
+            METHOD:
+            {metadata['method'][:500]}{'...' if len(metadata['method']) > 500 else ''}
+            """
             
             if metadata.get('chef_tip'):
                 recipe_text += f"\nCHEF'S TIP: {metadata['chef_tip']}\n"
@@ -113,22 +113,22 @@ METHOD:
         """
         base_prompt = f"""You are a helpful cooking assistant with access to a recipe database. 
 
-USER'S AVAILABLE INGREDIENTS:
-{user_ingredients}
-
-RELEVANT RECIPES FROM DATABASE:
-{retrieved_recipes}
-
-Based on the user's available ingredients and the retrieved recipes above, provide helpful recipe recommendations. 
-
-For each recommended recipe:
-1. Explain why it's a good match for their ingredients
-2. List which ingredients they already have
-3. List any missing ingredients (if any)
-4. Provide cooking tips or substitution suggestions if relevant
-
-Be conversational and friendly. If none of the recipes are a perfect match, suggest the closest options and explain what additional ingredients they would need.
-"""
+        USER'S AVAILABLE INGREDIENTS:
+        {user_ingredients}
+        
+        RELEVANT RECIPES FROM DATABASE:
+        {retrieved_recipes}
+        
+        Based on the user's available ingredients and the retrieved recipes above, provide helpful recipe recommendations. 
+        
+        For each recommended recipe:
+        1. Explain why it's a good match for their ingredients
+        2. List which ingredients they already have
+        3. List any missing ingredients (if any)
+        4. Provide cooking tips or substitution suggestions if relevant
+        
+        Be conversational and friendly. If none of the recipes are a perfect match, suggest the closest options and explain what additional ingredients they would need.
+        """
         
         if user_query:
             base_prompt += f"\n\nADDITIONAL USER REQUEST:\n{user_query}\n"
@@ -178,7 +178,7 @@ Be conversational and friendly. If none of the recipes are a perfect match, sugg
         if recipe_type:
             print(f"   Filtering by type: {recipe_type}")
         
-        # Step 1: Retrieve relevant recipes
+        # Retrieve relevant recipes
         search_results = self.search_recipes(ingredients, top_k, recipe_type)
         
         if not search_results or not search_results['matches']:
@@ -186,13 +186,13 @@ Be conversational and friendly. If none of the recipes are a perfect match, sugg
         
         print(f"✅ Found {len(search_results['matches'])} relevant recipes")
         
-        # Step 2: Format recipes for context
+        # Format recipes for context
         formatted_recipes = self.format_recipes_for_context(search_results)
         
-        # Step 3: Create prompt
+        # Create prompt
         prompt = self.create_prompt(ingredients, formatted_recipes, additional_request)
         
-        # Step 4: Generate response with Claude
+        #  Generate response
         print("🤖 Generating recommendations with Claude...")
         response = self.generate_response(prompt)
         
