@@ -47,7 +47,7 @@ class RecipeVectorStore:
                     metric=metric,
                     spec=ServerlessSpec(
                         cloud="aws",
-                        region="us-east-1"  # Use free tier region
+                        region="us-east-1"  
                     )
                 )
                 print(f"Index '{self.index_name}' created successfully!")
@@ -85,7 +85,7 @@ class RecipeVectorStore:
         """
         parts = []
         
-        # Recipe name (weighted by duplication for importance)
+        # Recipe name 
         recipe_name = recipe['metadata'].get('recipe_name', recipe['recipe_header'])
         parts.append(f"{recipe_name} {recipe_name}")
         
@@ -94,14 +94,14 @@ class RecipeVectorStore:
         if recipe_type:
             parts.append(recipe_type)
         
-        # Ingredients (most important for search)
+        # Ingredients 
         ingredients = recipe.get('ingredients', '')
         if ingredients:
             # Clean ingredients text
             ingredients_clean = ingredients.replace('\n', ' ').strip()
             parts.append(ingredients_clean)
         
-        # Method (first 500 characters for context)
+        # Method
         method = recipe.get('method', '')
         if method:
             method_preview = method[:500].replace('\n', ' ').strip()
